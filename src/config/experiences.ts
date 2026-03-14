@@ -51,7 +51,7 @@ export const experiences: Experience[] = [
     company: "Mendisphere, better.sg",
     description:
       "Designed and developed interfaces using Figma, React.js, Material UI, and TypeScript, integrating Firebase backend services to streamline grant and resource access for nonprofit mental health organisations",
-    date: "October 2025 - Present",
+    date: "October 2025 - March 2026",
     logo: mendisphereLogo,
     logoAlt: "Mendisphere",
     logoDesktopHeight: "16px",

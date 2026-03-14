@@ -5,6 +5,7 @@ import { Box, VStack} from "@chakra-ui/react";
 import HeroSection from "./Hero";
 import ExperiencesSection from "./Experiences";
 import ProjectsSection from "./Projects";
+import MoreAboutSection from "./MoreAbout";
 
 export default function IndexPage() {
   const { hash } = useLocation();
@@ -49,6 +50,17 @@ export default function IndexPage() {
         px={{ base: 4, md: 16 }}
       >
         <ProjectsSection />
+      </Box>
+      <Box
+        id="more-about"
+        h="100%"
+        display="flex"
+        alignItems="center"
+        py={6}
+        px={{ base: 4, md: 16 }}
+      >
+\
+        <MoreAboutSection />
       </Box>
       </VStack>
     </DefaultLayout>
