@@ -1,17 +1,39 @@
-import { Text, Card, Box, Grid } from "@chakra-ui/react";
+import { Text, Card, Box, Grid, HStack, Icon, TooltipRoot, TooltipTrigger, TooltipPositioner, TooltipContent, TooltipArrow } from "@chakra-ui/react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import { SiAmazonwebservices, SiCypress, SiDocker, SiExpress, SiFigma, SiFramer, SiMongodb, SiNodedotjs, SiNextdotjs, SiOpenai, SiPython, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
 import { projects } from "@/config/projects";
 import dubylogo from "@/assets/dubylogo.png";
+import sachdubyss1 from "@/assets/sachdubyss1.png";
+import sachdubyss2 from "@/assets/sachdubyss2.png";
+import sachdubyss3 from "@/assets/sachdubyss3.png";
 import tshgroup from "@/assets/tshgroup.png";
-import upsutd from "@/assets/upsutd.png";
+import upsutd1 from "@/assets/upsutd1.png";
+import upsutd2 from "@/assets/upsutd2.png";
+import upsutd3 from "@/assets/upsutd3.png";
 import lumify from "@/assets/lumify.png";
 import lorax from "@/assets/lorax.png";
+import tinyfishLogo from "@/assets/tinyfish_ai_logo.jpeg";
+import pigforpulse from "@/assets/pigforpulse.png";
 
 const MotionCard = motion.create(Card.Root as any);
 const MotionBox = motion.create(Box as any);
+
+function TechTooltip({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <TooltipRoot positioning={{ placement: "top" }}>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipPositioner>
+        <TooltipContent px={2} py={1} fontSize="xs" borderRadius="md" bg="#1a1a1a" color="white">
+          <TooltipArrow />
+          {label}
+        </TooltipContent>
+      </TooltipPositioner>
+    </TooltipRoot>
+  );
+}
 
 const showcasePalette = [
   {
@@ -166,36 +188,36 @@ function CodeSwitchPipeline({ hovered }: { hovered: boolean }) {
 function DubySpread({ hovered }: { hovered: boolean }) {
   const cards = [
     {
-      title: "Roster Schedule",
-      subtitle: "Shift calendar and monthly overview",
+      title: "Roster Planning",
       x: "18px",
       y: "82px",
       w: "205px",
       h: "118px",
       rotate: -8,
       accent: "#1ab7d6",
+      image: sachdubyss1,
       delay: 0,
     },
     {
       title: "Leave Requests",
-      subtitle: "Application flow and assignable slots",
       x: "106px",
       y: "58px",
       w: "214px",
       h: "118px",
       rotate: -1,
       accent: "#1784a8",
+      image: sachdubyss2,
       delay: 0.04,
     },
     {
-      title: "Roster Planning",
-      subtitle: "Ward planning and staffing matrix",
+      title: "Roster Scheduling",
       x: "194px",
       y: "88px",
       w: "214px",
       h: "118px",
       rotate: 7,
       accent: "#15586d",
+      image: sachdubyss3,
       delay: 0.08,
     },
   ] as const;
@@ -231,33 +253,28 @@ function DubySpread({ hovered }: { hovered: boolean }) {
           }}
           transition={{ duration: 0.34, ease: "easeOut", delay: card.delay }}
         >
-          <Box h="18px" bg="#f8f8f7" borderBottom="1px solid rgba(233,231,227,1)" px={3} display="flex" alignItems="center" justifyContent="space-between">
-            <Box display="flex" gap={1.5}>
-              <Box h="5px" w="5px" borderRadius="full" bg="#dfd9d2" />
-              <Box h="5px" w="5px" borderRadius="full" bg="#dfd9d2" />
-              <Box h="5px" w="5px" borderRadius="full" bg={card.accent} />
-            </Box>
-            <Text fontSize="8px" color="#8b8882">Mar 2026</Text>
-          </Box>
-          <Box px={3} pt={3} pb={2} h="calc(100% - 18px)" display="flex" flexDirection="column" justifyContent="space-between">
-            <Box>
-              <Text fontSize="11px" color="#2d2d2d" fontWeight="700">{card.title}</Text>
-              <Text fontSize="8px" color="#7b7873" mt={1}>{card.subtitle}</Text>
-            </Box>
-            <Box display="grid" gap={2}>
-              <Box h="12px" borderRadius="8px" bg="rgba(233, 243, 247, 0.92)" overflow="hidden">
-                <Box h="100%" w="68%" bg={card.accent} borderRadius="8px" />
-              </Box>
-              <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={1.5}>
-                {[0, 1, 2, 3, 4, 5].map((item) => (
-                  <Box key={item} h="20px" borderRadius="8px" bg={item % 3 === 0 ? "#1ab7d6" : item % 2 === 0 ? "#15586d" : "#a6a6a6"} opacity={item === 1 || item === 4 ? 0.4 : 1} />
-                ))}
-              </Box>
-              <Box display="flex" gap={1.5}>
-                <Box flex="1" h="22px" borderRadius="10px" bg="#eef4f6" border="1px solid rgba(223,230,232,1)" />
-                <Box flex="1" h="22px" borderRadius="10px" bg="#eef4f6" border="1px solid rgba(223,230,232,1)" />
-              </Box>
-            </Box>
+          <motion.img
+            src={card.image}
+            alt={`${card.title} screen`}
+            initial={false}
+            animate={{ scale: hovered ? 1.04 : 1.01, y: hovered ? -2 : 0 }}
+            transition={{ duration: 0.34, ease: "easeOut" }}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+          <Box
+            position="absolute"
+            left="10px"
+            top="10px"
+            px={2.5}
+            py={1.5}
+            borderRadius="14px"
+            bg="rgba(255,255,255,0.88)"
+            border="1px solid rgba(233,231,227,1)"
+            boxShadow="0 10px 18px rgba(91, 91, 91, 0.12)"
+          >
+            <Text fontSize="9px" color="#2d2d2d" fontWeight="700">
+              {card.title}
+            </Text>
           </Box>
         </MotionBox>
       ))}
@@ -276,6 +293,7 @@ function DubySpread({ hovered }: { hovered: boolean }) {
 }
 
 function UpsutdPhone({
+  screen,
   objectPosition,
   top,
   left,
@@ -285,6 +303,7 @@ function UpsutdPhone({
   delay = 0,
   zIndex = 1,
 }: {
+  screen: string;
   objectPosition: string;
   top: string;
   left?: string;
@@ -314,29 +333,19 @@ function UpsutdPhone({
         position="relative"
         w="100%"
         h="100%"
-        borderRadius="30px"
-        bg="#050505"
-        border="2px solid rgba(255,255,255,0.9)"
-        boxShadow="0 24px 50px rgba(14, 18, 22, 0.34)"
+        borderRadius="24px"
         overflow="hidden"
+        boxShadow="0 24px 50px rgba(14, 18, 22, 0.28)"
+        bg="transparent"
       >
-        <Box position="absolute" inset="10px" borderRadius="23px" bg="#f7f5f3" overflow="hidden">
-          <motion.img
-            src={upsutd}
-            alt="UPSUTD mobile screen"
-            initial={false}
-            animate={{ scale: hovered ? 1.06 : 1.01 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition }}
-          />
-        </Box>
-
-        <Box position="absolute" top="10px" left="50%" transform="translateX(-50%)" w="44%" h="16px" borderBottomLeftRadius="14px" borderBottomRightRadius="14px" bg="#050505" />
-        <Box position="absolute" top="16px" left="50%" transform="translateX(-50%)" w="19%" h="4px" borderRadius="full" bg="rgba(255,255,255,0.3)" />
-        <Box position="absolute" top="15px" right="28%" w="6px" h="6px" borderRadius="full" bg="rgba(255,255,255,0.38)" />
-        <Box position="absolute" left="-2px" top="56px" w="4px" h="34px" borderRadius="full" bg="rgba(255,255,255,0.72)" />
-        <Box position="absolute" left="-2px" top="99px" w="4px" h="22px" borderRadius="full" bg="rgba(255,255,255,0.72)" />
-        <Box position="absolute" right="-2px" top="83px" w="4px" h="46px" borderRadius="full" bg="rgba(255,255,255,0.72)" />
+        <motion.img
+          src={screen}
+          alt="UPSUTD mobile screen"
+          initial={false}
+          animate={{ scale: hovered ? 1.06 : 1.01 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition }}
+        />
       </Box>
     </MotionBox>
   );
@@ -377,9 +386,127 @@ function UpsutdSpread({ hovered }: { hovered: boolean }) {
         </Text>
       </MotionBox>
 
-      <UpsutdPhone objectPosition="12% center" top="46px" left="12px" rotation={-11} hovered={hovered} zIndex={2} />
-      <UpsutdPhone objectPosition="50% center" top="22px" left="118px" rotation={2} hovered={hovered} delay={0.04} zIndex={4} />
-      <UpsutdPhone objectPosition="88% center" top="50px" right="12px" rotation={12} hovered={hovered} delay={0.08} zIndex={3} />
+      <UpsutdPhone screen={upsutd1} objectPosition="12% center" top="46px" left="12px" rotation={-11} hovered={hovered} zIndex={2} />
+      <UpsutdPhone screen={upsutd2} objectPosition="50% center" top="22px" left="118px" rotation={2} hovered={hovered} delay={0.04} zIndex={4} />
+      <UpsutdPhone screen={upsutd3} objectPosition="88% center" top="50px" right="12px" rotation={12} hovered={hovered} delay={0.08} zIndex={3} />
+    </MotionBox>
+  );
+}
+
+function PulseIphoneShowcase({ hovered }: { hovered: boolean }) {
+  return (
+    <MotionBox
+      w="100%"
+      h="100%"
+      position="relative"
+      bg="linear-gradient(180deg, #f6f7f7 0%, #e8edf1 100%)"
+      animate={{ scale: hovered ? 1.015 : 1 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+    >
+      <Box
+        position="absolute"
+        inset={0}
+        backgroundImage="radial-gradient(circle at 18% 20%, rgba(255,255,255,0.95), transparent 28%), radial-gradient(circle at 78% 16%, rgba(180, 204, 224, 0.2), transparent 24%)"
+        opacity={0.95}
+      />
+
+      <MotionBox
+        position="absolute"
+        top="16px"
+        left="18px"
+        px={3}
+        py={1.5}
+        borderRadius="full"
+        bg="rgba(255,255,255,0.86)"
+        border="1px solid rgba(255,255,255,0.96)"
+        boxShadow="0 10px 22px rgba(89, 104, 118, 0.12)"
+        animate={{ y: hovered ? -2 : 0 }}
+        transition={{ duration: 0.22, ease: "easeOut" }}
+      >
+        <Text fontSize="10px" color="#6b7785" fontWeight="700" letterSpacing="0.12em" textTransform="uppercase">
+          Product Preview
+        </Text>
+      </MotionBox>
+
+      <MotionBox
+        position="absolute"
+        left="50%"
+        top="28px"
+        transform="translateX(-50%)"
+        w="178px"
+        h="214px"
+        borderRadius="34px"
+        bg="#0f1115"
+        boxShadow="0 24px 54px rgba(20, 28, 36, 0.28)"
+        border="1px solid rgba(255,255,255,0.1)"
+        animate={{ y: hovered ? -6 : 0, rotate: hovered ? -1.5 : -3 }}
+        transition={{ duration: 0.34, ease: "easeOut" }}
+      >
+        <Box
+          position="absolute"
+          top="8px"
+          left="50%"
+          transform="translateX(-50%)"
+          w="64px"
+          h="16px"
+          borderRadius="10px"
+          bg="#0b0d10"
+          boxShadow="inset 0 0 0 1px rgba(255,255,255,0.08)"
+        />
+
+        <MotionBox
+          position="absolute"
+          inset="10px"
+          borderRadius="28px"
+          overflow="hidden"
+          bg="#ffffff"
+          animate={{ scale: hovered ? 1.02 : 1 }}
+          transition={{ duration: 0.34, ease: "easeOut" }}
+        >
+          <motion.img
+            src={pigforpulse}
+            alt="Pulse preview"
+            initial={false}
+            animate={{ scale: hovered ? 1.05 : 1.01, y: hovered ? -4 : 0 }}
+            transition={{ duration: 0.36, ease: "easeOut" }}
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+          />
+        </MotionBox>
+
+        <Box
+          position="absolute"
+          right="-3px"
+          top="54px"
+          w="3px"
+          h="38px"
+          borderRadius="8px"
+          bg="linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1))"
+        />
+        <Box
+          position="absolute"
+          left="-3px"
+          top="58px"
+          w="3px"
+          h="26px"
+          borderRadius="8px"
+          bg="linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0.08))"
+        />
+      </MotionBox>
+
+      <MotionBox
+        position="absolute"
+        right="18px"
+        bottom="18px"
+        px={3}
+        py={2}
+        borderRadius="18px"
+        bg="rgba(255,255,255,0.9)"
+        border="1px solid rgba(232, 238, 240, 1)"
+        boxShadow="0 10px 20px rgba(88, 98, 104, 0.12)"
+        animate={{ y: hovered ? -3 : 0, rotate: hovered ? 2 : 0 }}
+      >
+        <Text fontSize="10px" color="#5d6b78" fontWeight="700">Pulse Live Event Flow</Text>
+      </MotionBox>
     </MotionBox>
   );
 }
@@ -472,6 +599,7 @@ function ProjectShowcase({
   const isDubyProject = project.title === "Duby — Workforce Management Application";
   const isUpsutdProject = project.title === "UPSUTD — Upcycling Marketplace";
   const isLoraxProject = project.title === "Lorax' Luscious Hair";
+  const isPulseProject = project.title === "LevelUpNow! Hackathon (3rd Place Winner)";
 
   return (
     <MotionBox
@@ -519,6 +647,8 @@ function ProjectShowcase({
       >
         {isUpsutdProject ? (
           <UpsutdSpread hovered={hovered} />
+        ) : isPulseProject ? (
+          <PulseIphoneShowcase hovered={hovered} />
         ) : isLoraxProject ? (
           <LoraxShowcase hovered={hovered} />
         ) : media ? (
@@ -570,8 +700,19 @@ function AnimatedCard({ project, index }: { project: (typeof projects)[number]; 
   const navigate = useNavigate();
   const isWip = project.href === "/wip";
   const isDubyProject = project.title === "Duby — Workforce Management Application";
+  const isCodeSwitchProject = project.title === "Code-Switching Data Translation Pipeline";
+  const isTrainingProject = project.title === "Automated Training Management Application";
   const isLoraxProject = project.title === "Lorax' Luscious Hair";
+  const isPulseProject = project.title === "LevelUpNow! Hackathon (3rd Place Winner)";
+  const isOpenVoyageProject = project.title === "OpenVoyage — AI Travel Booking";
   const palette = showcasePalette[index % showcasePalette.length];
+  const techStackLabels = isDubyProject
+    ? ["AWS", "Python", "React", "TypeScript", "Docker"]
+    : isCodeSwitchProject
+      ? ["Python", "LangGraph", "LangChain"]
+      : isPulseProject
+        ? ["Next.js", "React", "Tailwind CSS"]
+        : null;
 
   const [hovered, setHovered] = useState(false);
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -648,12 +789,102 @@ function AnimatedCard({ project, index }: { project: (typeof projects)[number]; 
           </Box>
         </Card.Body>
         <Card.Footer justifyContent="space-between" alignItems="center" px={{ base: 5, md: 6 }} pb={{ base: 5, md: 6 }} pt={0}>
-          <Text color="#84807b" fontSize="sm" textTransform="uppercase" letterSpacing="0.12em" fontWeight="700">Project Snapshot</Text>
-          {project.logo === null ? null : (
+          {isDubyProject ? (
+            <HStack gap={3} color="#84807b">
+              <TechTooltip label="AWS">
+                <Box display="inline-flex"><Icon as={SiAmazonwebservices} boxSize={4} title="AWS" /></Box>
+              </TechTooltip>
+              <TechTooltip label="Figma">
+                <Box display="inline-flex"><Icon as={SiFigma} boxSize={4} title="Figma" /></Box>
+              </TechTooltip>
+              <TechTooltip label="Python">
+                <Box display="inline-flex"><Icon as={SiPython} boxSize={4} title="Python" /></Box>
+              </TechTooltip>
+              <TechTooltip label="React">
+                <Box display="inline-flex"><Icon as={SiReact} boxSize={4} title="React" /></Box>
+              </TechTooltip>
+              <TechTooltip label="TypeScript">
+                <Box display="inline-flex"><Icon as={SiTypescript} boxSize={4} title="TypeScript" /></Box>
+              </TechTooltip>
+              <TechTooltip label="Docker">
+                <Box display="inline-flex"><Icon as={SiDocker} boxSize={4} title="Docker" /></Box>
+              </TechTooltip>
+              <Text fontSize="sm" fontWeight="600">Playwright</Text>
+            </HStack>
+          ) : isCodeSwitchProject ? (
+            <HStack gap={3} color="#84807b">
+              <TechTooltip label="Python">
+                <Box display="inline-flex"><Icon as={SiPython} boxSize={4} title="Python" /></Box>
+              </TechTooltip>
+              <Text fontSize="sm" fontWeight="600">LangGraph</Text>
+              <Text fontSize="sm" fontWeight="600">LangChain</Text>
+            </HStack>
+          ) : isTrainingProject ? (
+            <HStack gap={3} color="#84807b">
+              <TechTooltip label="MongoDB">
+                <Box display="inline-flex"><Icon as={SiMongodb} boxSize={4} title="MongoDB" /></Box>
+              </TechTooltip>
+              <TechTooltip label="Cypress">
+                <Box display="inline-flex"><Icon as={SiCypress} boxSize={4} title="Cypress" /></Box>
+              </TechTooltip>
+              <TechTooltip label="TypeScript">
+                <Box display="inline-flex"><Icon as={SiTypescript} boxSize={4} title="TypeScript" /></Box>
+              </TechTooltip>
+              <TechTooltip label="Express.js">
+                <Box display="inline-flex"><Icon as={SiExpress} boxSize={4} title="Express.js" /></Box>
+              </TechTooltip>
+              <TechTooltip label="Node.js">
+                <Box display="inline-flex"><Icon as={SiNodedotjs} boxSize={4} title="Node.js" /></Box>
+              </TechTooltip>
+              <TechTooltip label="React">
+                <Box display="inline-flex"><Icon as={SiReact} boxSize={4} title="React" /></Box>
+              </TechTooltip>
+            </HStack>
+          ) : isPulseProject ? (
+            <HStack gap={3} color="#84807b">
+              <TechTooltip label="Next.js">
+                <Box display="inline-flex"><Icon as={SiNextdotjs} boxSize={4} title="Next.js" /></Box>
+              </TechTooltip>
+              <TechTooltip label="React">
+                <Box display="inline-flex"><Icon as={SiReact} boxSize={4} title="React" /></Box>
+              </TechTooltip>
+              <TechTooltip label="Tailwind CSS">
+                <Box display="inline-flex"><Icon as={SiTailwindcss} boxSize={4} title="Tailwind CSS" /></Box>
+              </TechTooltip>
+            </HStack>
+          ) : isOpenVoyageProject ? (
+            <HStack gap={3} color="#84807b">
+              <TechTooltip label="Next.js 14">
+                <Box display="inline-flex"><Icon as={SiNextdotjs} boxSize={4} title="Next.js" /></Box>
+              </TechTooltip>
+              <TechTooltip label="Tailwind CSS">
+                <Box display="inline-flex"><Icon as={SiTailwindcss} boxSize={4} title="Tailwind CSS" /></Box>
+              </TechTooltip>
+              <TechTooltip label="Framer Motion">
+                <Box display="inline-flex"><Icon as={SiFramer} boxSize={4} title="Framer Motion" /></Box>
+              </TechTooltip>
+              <TechTooltip label="OpenAI">
+                <Box display="inline-flex"><Icon as={SiOpenai} boxSize={4} title="OpenAI" /></Box>
+              </TechTooltip>
+              <TechTooltip label="TinyFish">
+                <Box display="inline-flex"><img src={tinyfishLogo} alt="TinyFish" style={{ height: "16px", width: "16px", borderRadius: "999px", objectFit: "cover" }} /></Box>
+              </TechTooltip>
+              <TechTooltip label="Supabase">
+                <Box display="inline-flex"><Icon as={SiSupabase} boxSize={4} title="Supabase" /></Box>
+              </TechTooltip>
+            </HStack>
+          ) : techStackLabels ? (
+            <Text color="#84807b" fontSize="sm" fontWeight="600">
+              {techStackLabels.join(" \u00b7 ")}
+            </Text>
+          ) : (
+            <Text color="#84807b" fontSize="sm" textTransform="uppercase" letterSpacing="0.12em" fontWeight="700">Project Snapshot</Text>
+          )}
+          {project.logo ? (
             <Box display="inline-flex" alignItems="center" justifyContent="center" borderRadius="full" bg={project.logoBg ?? "rgba(255,255,255,0.82)"} border={project.logoBg ? "none" : "1px solid rgba(224, 220, 214, 0.95)"} p={project.logoBg ? "6px" : "8px"} boxShadow="0 10px 22px rgba(119, 119, 119, 0.08)">
               {typeof project.logo === "string" ? <img src={project.logo} alt={project.logoAlt} style={{ height: "32px", width: "auto" }} /> : <project.logo size={28} color="#595858" />}
             </Box>
-          )}
+          ) : null}
         </Card.Footer>
       </MotionCard>
 

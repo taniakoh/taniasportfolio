@@ -7,6 +7,7 @@ import lumifylogo from "@/assets/lumifylogo.png";
 import { SiKaggle } from "react-icons/si";
 import TshLogo from "@/assets/tshlogo.png";
 import { IoIosPhonePortrait } from "react-icons/io";
+import tinyfishLogo from "@/assets/tinyfish_ai_logo.jpeg";
 export interface Project {
   title: string;
   description: string;
@@ -32,6 +33,20 @@ export const projects: Project[] = [
     logoAlt: "Code-Switching Data Translation Pipeline",
     href: "https://github.com/taniakoh/code-switching-agent",
     
+  },
+  {
+    title: "LevelUpNow! Hackathon (3rd Place Winner)",
+    description: "Phygital (physical + digital) gaming platform designed to enhance audience engagement at live events hosted at SCAPE. Built during the Level Up Now! Hackathon 2026, a youth-focused innovation sprint tackling real-world challenges in the gaming industry.",
+    logo: null,
+    logoAlt: "Level Up Now Hackathon project",
+    href: "https://www.scape-pulse.space/",
+  },
+  {
+    title: "OpenVoyage — AI Travel Booking",
+    description: "AI-native travel planning and booking prototype built for the TinyFish SG Hackathon 2026. Uses OpenAI for intent parsing and TinyFish for agentic web scouting to prep a cinematic mission-control booking flow.",
+    logo: tinyfishLogo,
+    logoAlt: "TinyFish AI",
+    href: "https://open-voyage.vercel.app",
   },
   {
     title: "Automated Training Management Application",
